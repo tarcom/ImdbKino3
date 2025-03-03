@@ -27,7 +27,7 @@ public class FetchSingleMovie {
             Document kinoDoc = Jsoup.connect(kinoFilmUrl).get();
             imdbUrl = Jsoup.connect(kinoFilmUrl).get().select(".logo.movie-view__imdb-logo a").first().attr("href");
 
-            String censur = kinoDoc.select("div.movie-view__censur-wrapper").first().select("img").first().attr("alt");
+            String censur = kinoDoc.select("div.movie-view__censur-wrapper").first().select("img").first().attr("alt").replace("Censur", "").trim();
             //kinoDoc.select("div.movie-view__censur-wrapper").first().select(".hovertext").first().attr("data-hover")
 
 
@@ -38,11 +38,13 @@ public class FetchSingleMovie {
             System.out.println("Title: " + kinoMovieTitle + ", kinoFilmUrl: " + kinoFilmUrl + ", imdbUrl: " + imdbUrl + ", score: " + score + ", votes: " + votes + ", censur: " + censur);
 
 
-            String movieHit = score + " <a href='" + imdbUrl + "'>link</a> - <b>" + kinoMovieTitle + "</b>" + "votes=" + votes + ", censur=" + censur;
+            String movieHit = "<tr><td>" + score + "</td><td><a href='" + imdbUrl + "'>link</a></td><td><b>" + kinoMovieTitle + "</b></td><td>" + votes + "</td><td>" + censur + "</td></tr>";
             sortedMovies.add(movieHit);
             System.out.println(movieHit);
         } catch (IOException e) {
+            System.err.println("Error: " + kinoMovieTitle + ", " + kinoFilmUrl + ", " + imdbUrl);
             e.printStackTrace();
+            ImdbKino.errors.append("Error: " + kinoMovieTitle + ", " + kinoFilmUrl + ", " + imdbUrl + ", e=" + e.getMessage() + "<br>\n");
         }
 
     }

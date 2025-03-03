@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 public class ImdbKino {
 
     TreeSet<String> sortedMovies = new TreeSet<String>();
+    public static StringBuffer errors = new StringBuffer("Errors are listed here:<br>\n");
 
     public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("Welcome to ImdbKino");
@@ -30,6 +31,7 @@ public class ImdbKino {
 
         htmlOutputStringBuffer.append("I found " + alleFilm.size() + " movies in " + kinoUrl + "<br>\n<br>\n");
 
+
         ExecutorService es = Executors.newCachedThreadPool();
         for (final Element film : alleFilm) {
             String kinoMovieTitle = film.select("div.movies-grid__movie-title").text();
@@ -45,20 +47,26 @@ public class ImdbKino {
 
         es.shutdown();
 
-        boolean finshed = es.awaitTermination(1, TimeUnit.MINUTES);
+        boolean finshed = es.awaitTermination(2, TimeUnit.MINUTES);
 
 
         System.out.println("");
         System.out.println("");
+        htmlOutputStringBuffer.append("<table border=1 cellpadding=2>\n");
+        htmlOutputStringBuffer.append("<tr><th>Score</th><th>Imdb Link</th><th>Movie</th><th>Votes</th><th>Censur</th></tr>\n");
         for (String sortedMovie : sortedMovies.descendingSet()) {
             //System.out.println(sortedMovie);
-            htmlOutputStringBuffer.append(sortedMovie + " <br>\n");
+            htmlOutputStringBuffer.append(sortedMovie + "\n");
         }
+        htmlOutputStringBuffer.append("</table>\n");
 
         htmlOutputStringBuffer.append("<br>\nAll movies have been collected.");
-        htmlOutputStringBuffer.append(
-                "<br>\nI started out with " + alleFilm.size() + " film, and have collected IMDB info from " + sortedMovies.size() + " movies. <br>\n");
+        htmlOutputStringBuffer.append("<br>\nI started out with " + alleFilm.size() + " film, and have collected IMDB info from " + sortedMovies.size() + " movies. <br>\n");
+
+        htmlOutputStringBuffer.append("Errors: " + errors);
+
         htmlOutputStringBuffer.append("Time used: " + (System.currentTimeMillis() - startTime) / 1000l + " seconds.<br>\n");
+
         return htmlOutputStringBuffer.toString();
 
     }
