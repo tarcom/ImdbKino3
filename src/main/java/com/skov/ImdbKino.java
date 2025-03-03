@@ -64,9 +64,9 @@ public class ImdbKino {
         htmlOutputStringBuffer.append("<br>\nAll movies have been collected.");
         htmlOutputStringBuffer.append("<br>\nI started out with " + alleFilm.size() + " film, and have collected IMDB info from " + sortedMovies.size() + " movies. <br>\n");
 
-        htmlOutputStringBuffer.append("Errors: " + errors);
 
-        htmlOutputStringBuffer.append("Time used: " + (System.currentTimeMillis() - startTime) / 1000l + " seconds.<br>\n");
+        htmlOutputStringBuffer.append("Time used: " + (System.currentTimeMillis() - startTime) / 1000l + " seconds.<br>\n<br>\n<br>\n");
+        htmlOutputStringBuffer.append("Errors: " + errors);
 
         return htmlOutputStringBuffer.toString();
 

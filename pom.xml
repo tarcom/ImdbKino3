@@ -13,7 +13,7 @@
   </parent>
   
   <groupId>com.example</groupId>
-  <artifactId>hello-jsp-app</artifactId>
+  <artifactId>ImdbKino</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   
