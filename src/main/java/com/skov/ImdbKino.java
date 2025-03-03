@@ -17,6 +17,7 @@ public class ImdbKino {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("Welcome to ImdbKino");
+        errors = new StringBuffer("Errors are listed here. " + System.currentTimeMillis() + "<br>\n");
         System.out.println(new ImdbKino().execute());
     }
 
@@ -47,7 +48,7 @@ public class ImdbKino {
 
         es.shutdown();
 
-        boolean finshed = es.awaitTermination(2, TimeUnit.MINUTES);
+        boolean finshed = es.awaitTermination(1, TimeUnit.MINUTES);
 
 
         System.out.println("");

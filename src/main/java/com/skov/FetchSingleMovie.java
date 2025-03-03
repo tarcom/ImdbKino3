@@ -44,7 +44,7 @@ public class FetchSingleMovie {
         } catch (IOException e) {
             System.err.println("Error: " + kinoMovieTitle + ", " + kinoFilmUrl + ", " + imdbUrl);
             e.printStackTrace();
-            ImdbKino.errors.append("Error: " + kinoMovieTitle + ", " + kinoFilmUrl + ", " + imdbUrl + ", e=" + e.getMessage() + "<br>\n");
+            ImdbKino.errors.append("Error: " + kinoMovieTitle + ", <a href='" + kinoFilmUrl + "'>" + kinoFilmUrl + "</a>, " + imdbUrl + ", e=" + e.getMessage() + "<br>\n");
         }
 
     }
