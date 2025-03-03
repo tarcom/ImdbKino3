@@ -1,3 +1,9 @@
+gcloud app deploy
+
+
+--
+
+
 mvn spring-boot:run
 
 
